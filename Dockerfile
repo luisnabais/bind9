@@ -1,4 +1,4 @@
-FROM {{ alpine_image }}:{{ alpine_version }}
+FROM alpine:3.15.4
 
 RUN apk add --no-cache bind
 
