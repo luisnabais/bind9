@@ -8,7 +8,9 @@ docker-build:
   services:
     - docker:dind
   before_script:
-    - docker login -u $CI_PROJECT_NAMESPACE} -p ${DOCKER_TOKEN}
+    - echo "User ${CI_PROJECT_NAMESPACE}"
+    - echo "Token ${DOCKER_TOKEN}"
+    - docker login -u ${CI_PROJECT_NAMESPACE} -p ${DOCKER_TOKEN}
   script:
     - echo "Generating image ${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}:${tag}..."
     - docker build -t ${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}:${tag} .
