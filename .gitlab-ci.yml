@@ -5,7 +5,6 @@ services:
 
 variables:
   DOCKER_REPO: 'luisnabais/bind9'
-  DOCKER_DRIVER: overlay2
   BUILDX_VERSION: "v0.8.2"
   BUILDX_URL: "https://github.com/docker/buildx/releases/download/${BUILDX_VERSION}/buildx-${BUILDX_VERSION}.linux-amd64"
   BUILDX_PLATFORMS: "linux/amd64,linux/arm64/v8"
@@ -19,7 +18,7 @@ docker-build:
   script:
     - echo "Generating image ${DOCKER_REPO}:${CI_COMMIT_TAG}..."
     - docker-buildx create --use
-    - docker buildx build --platform ${BUILDX_PLATFORMS} -t ${DOCKER_REPO} .
+    - docker buildx build --platform ${BUILDX_PLATFORMS} -t ${DOCKER_REPO}:latest .
     - docker tag ${DOCKER_REPO}:latest ${DOCKER_REPO}:${CI_COMMIT_TAG}
     - echo "Pushing image ${DOCKER_REPO}:${CI_COMMIT_TAG}..."
     - docker push ${DOCKER_REPO}:${CI_COMMIT_TAG}
