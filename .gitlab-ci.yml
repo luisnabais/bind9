@@ -3,11 +3,14 @@ stages:
   - push    
     
 docker-build:
+  image: docker:latest
   stage: build
+  services:
+    - docker:dind
   before_script:
-    - docker login -u ${CI_PROJECT_NAMESPACE} -p ${DOCKER_TOKEN}
+    - docker login -u $CI_PROJECT_NAMESPACE} -p ${DOCKER_TOKEN}
   script:
-    - echo "Generating image ${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}:${tag}"
+    - echo "Generating image ${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}:${tag}..."
     - docker build -t ${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}:${tag} .
   # Run this job in a branch where a Dockerfile exists
   rules:
@@ -18,6 +21,6 @@ docker-build:
 docker-push:
   stage: push
   script:
-    - echo "Generating image ${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}:${tag}"
+    - echo "Pushing image ${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}:${tag}..."
     - docker push ${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}:${tag}
     - docker push ${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}
