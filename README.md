@@ -1,4 +1,4 @@
-# [luisnabais/bind9](https://github.com/luisnabais/bind9)
+# [luisnabais/bind9](https://gitlab.com/luisnabais/bind9)
 
 This code consists on the following:
 - Dockerfile, to build the image. Based on the official Alpine image.
@@ -16,7 +16,7 @@ Here are some example snippets to help you get started creating a container.
 version: '3'
 services:
   bind9:
-    image: luisnabais/bind9:latest
+    image: luisnabais/bind9
     container_name: bind9
     hostname: bind9
     environment:
@@ -40,7 +40,7 @@ docker run -d \
   -p 53:53 \
   -p 53:53/udp \
   --restart unless-stopped \
-  luisnabais/bind9:latest
+  luisnabais/bind9
 ```
 
 ## Updating Info
@@ -56,7 +56,7 @@ Below are the instructions for updating containers:
 
 ### Via Docker Run
 
-* Update the image: `docker pull luisnabais/bind9:latest`
+* Update the image: `docker pull luisnabais/bind9`
 * Stop the running container: `docker stop bind9`
 * Delete the container: `docker rm bind9`
 * Recreate a new container with the same docker run parameters as instructed above.
@@ -68,10 +68,10 @@ Below are the instructions for updating containers:
 If you want to make local modifications to these images for development purposes or just to customize the logic:
 
 ```bash
-git clone https://github.com/luisnabais/bind9.git
+git clone https://gitlab.com/luisnabais/bind9.git
 cd bind9
 docker build \
   --no-cache \
   --pull \
-  -t luisnabais/bind9:latest .
+  -t luisnabais/bind9 .
 ```
